@@ -1,16 +1,18 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 export const FavoritesContext = createContext();
 
-function FavoritesProvider({ children }) {
+export function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState([]);
 
   const addFavorite = (movie) => {
-    setFavorites((prev) => [...prev, movie]);
+    setFavorites((prev) =>
+      prev.find((fav) => fav.imdbID === movie.imdbID) ? prev : [...prev, movie]
+    );
   };
 
   const removeFavorite = (id) => {
-    setFavorites((prev) => prev.filter(movie => movie.imdbID !== id));
+    setFavorites((prev) => prev.filter((movie) => movie.imdbID !== id));
   };
 
   return (
@@ -19,5 +21,3 @@ function FavoritesProvider({ children }) {
     </FavoritesContext.Provider>
   );
 }
-
-export default FavoritesProvider;

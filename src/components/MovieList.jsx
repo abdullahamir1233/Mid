@@ -1,20 +1,18 @@
-import React from 'react';
-import MovieItem from './MovieItem';
-
-const MovieList = () => {
-  const movies = [
-    { id: 1, title: 'Inception', releaseDate: '2010', rating: '8.8' },
-    { id: 2, title: 'The Dark Knight', releaseDate: '2008', rating: '9.0' },
-    { id: 3, title: 'Interstellar', releaseDate: '2014', rating: '8.6' }
-  ];
+import MovieItem from "./MovieItem";
+export default function MovieList({ movies, onAddFavorite, onRemoveFavorite, favorites }) {
+  if (!movies.length) return <p>No movies found.</p>;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
-      {movies.map(movie => (
-        <MovieItem key={movie.id} movie={movie} />
+    <div className="grid grid-cols-3 gap-4">
+      {movies.map((movie) => (
+        <MovieItem
+          key={movie.imdbID}
+          movie={movie}
+          onAddFavorite={onAddFavorite}
+          onRemoveFavorite={onRemoveFavorite}
+          isFavorite={favorites.some((fav) => fav.imdbID === movie.imdbID)}
+        />
       ))}
     </div>
   );
-};
-
-export default MovieList;
+}
