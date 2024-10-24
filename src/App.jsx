@@ -1,4 +1,3 @@
-// App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
@@ -10,7 +9,7 @@ import SearchBar from './components/SearchBar';
 
 const App = () => {
   const handleSearch = (query) => {
-    console.log('Search query:', query); // For now, just log the search query
+    console.log('Search query:', query); 
   };
 
   return (
